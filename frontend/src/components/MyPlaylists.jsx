@@ -144,34 +144,42 @@ const MyPlaylists = () => {
                 ))}
             </ul>
             {(editingPlaylist || isCreatingPlaylist) && (
-    <div>
-        <h3>{editingPlaylist ? "Edit Playlist" : "Create Playlist"}</h3>
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                value={playlistName}
-                onChange={(e) => setPlaylistName(e.target.value)}
-                placeholder="Playlist Name"
-            />
-            <h4>Select Songs</h4>
-            <ul>
-                {mySongs
-                    .filter((song) => song.previewUrl) 
-                    .map((song) => (
-                        <li key={song._id}>
-                            <input
-                                type="checkbox"
-                                checked={selectedSongs.find((s) => s._id === song._id)}
-                                onChange={() => handleSongSelection(song)}
-                            />
-                            {song.title} by {song.artist}
-                        </li>
-                    ))}
-            </ul>
-            <button type="submit">{editingPlaylist ? "Save" : "Create"}</button>
-        </form>
-    </div>
-)}
+                <div>
+                    <h3>
+                        {editingPlaylist ? "Edit Playlist" : "Create Playlist"}
+                    </h3>
+                    <form onSubmit={handleSubmit}>
+                        <input
+                            type="text"
+                            value={playlistName}
+                            onChange={(e) => setPlaylistName(e.target.value)}
+                            placeholder="Playlist Name"
+                        />
+                        <h4>Select Songs</h4>
+                        <ul>
+                            {mySongs
+                                .filter((song) => song.previewUrl)
+                                .map((song) => (
+                                    <li key={song._id}>
+                                        <input
+                                            type="checkbox"
+                                            checked={selectedSongs.find(
+                                                (s) => s._id === song._id
+                                            )}
+                                            onChange={() =>
+                                                handleSongSelection(song)
+                                            }
+                                        />
+                                        {song.title} by {song.artist}
+                                    </li>
+                                ))}
+                        </ul>
+                        <button type="submit">
+                            {editingPlaylist ? "Save" : "Create"}
+                        </button>
+                    </form>
+                </div>
+            )}
 
             <audio
                 ref={audioRef}
