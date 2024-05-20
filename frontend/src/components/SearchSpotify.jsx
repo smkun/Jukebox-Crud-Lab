@@ -11,7 +11,7 @@ const SearchSpotify = () => {
         e.preventDefault();
         try {
             const response = await axios.get(
-                `http://localhost:5000/api/search?query=${query}`
+                `http://ec2-3-14-175-247.us-east-2.compute.amazonaws.com:5001/api/search?query=${query}`
             );
             setResults(response.data);
             if (response.data.length === 0) {
@@ -36,7 +36,10 @@ const SearchSpotify = () => {
                 spotifyId: track.id,
                 previewUrl: track.preview_url, // Store the preview URL
             };
-            await axios.post("http://localhost:5000/api/tracks", newTrack);
+            await axios.post(
+                "http://ec2-3-14-175-247.us-east-2.compute.amazonaws.com:5001/api/tracks",
+                newTrack
+            );
             setMessage("Track added to My Songs.");
         } catch (error) {
             console.error("Error adding track to database:", error);
