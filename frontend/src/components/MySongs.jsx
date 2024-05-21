@@ -10,7 +10,7 @@ const MySongs = () => {
         const fetchSongs = async () => {
             try {
                 const response = await axios.get(
-                    "http://ec2-3-14-175-247.us-east-2.compute.amazonaws.com:5001/api/tracks"
+                    "http://localhost:5001/api/tracks"
                 );
                 setSongs(response.data);
             } catch (error) {
@@ -22,9 +22,7 @@ const MySongs = () => {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(
-                `http://ec2-3-14-175-247.us-east-2.compute.amazonaws.com:5001/api/tracks/${id}`
-            );
+            await axios.delete(`http://localhost:5001/api/tracks/${id}`);
             setSongs(songs.filter((song) => song._id !== id));
         } catch (error) {
             console.error("Error deleting song:", error);

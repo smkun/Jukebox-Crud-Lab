@@ -17,7 +17,7 @@ const MyPlaylists = () => {
         const fetchPlaylists = async () => {
             try {
                 const response = await axios.get(
-                    "http://ec2-3-14-175-247.us-east-2.compute.amazonaws.com:5001/api/playlists"
+                    "http://localhost:5001/api/playlists"
                 );
                 setPlaylists(response.data);
             } catch (error) {
@@ -29,7 +29,7 @@ const MyPlaylists = () => {
         const fetchMySongs = async () => {
             try {
                 const response = await axios.get(
-                    "http://ec2-3-14-175-247.us-east-2.compute.amazonaws.com:5001/api/tracks"
+                    "http://localhost:5001/api/tracks"
                 );
                 setMySongs(response.data);
             } catch (error) {
@@ -47,9 +47,7 @@ const MyPlaylists = () => {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(
-                `http://ec2-3-14-175-247.us-east-2.compute.amazonaws.com:5001/api/playlists/${id}`
-            );
+            await axios.delete(`http://localhost:5001/api/playlists/${id}`);
             setPlaylists(playlists.filter((playlist) => playlist._id !== id));
         } catch (error) {
             console.error("Error deleting playlist:", error);
@@ -69,16 +67,13 @@ const MyPlaylists = () => {
         try {
             const response = editingPlaylist
                 ? await axios.put(
-                      `http://ec2-3-14-175-247.us-east-2.compute.amazonaws.com:5001/api/playlists/${editingPlaylist._id}`,
+                      `http://localhost:5001/api/playlists/${editingPlaylist._id}`,
                       { name: playlistName, tracks: selectedSongs }
                   )
-                : await axios.post(
-                      "http://ec2-3-14-175-247.us-east-2.compute.amazonaws.com:5001/api/playlists",
-                      {
-                          name: playlistName,
-                          tracks: selectedSongs,
-                      }
-                  );
+                : await axios.post("http://localhost:5001/api/playlists", {
+                      name: playlistName,
+                      tracks: selectedSongs,
+                  });
             setPlaylists(
                 editingPlaylist
                     ? playlists.map((playlist) =>
